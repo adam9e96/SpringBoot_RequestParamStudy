@@ -1,6 +1,7 @@
 package com.adam9e96.RequestParamStudy.controller;
 
 import com.adam9e96.RequestParamStudy.form.Form;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,11 +17,13 @@ import java.time.LocalDate;
  * 사용자로부터 입력을 받아 확인 화면으로 전달하는 역할을 합니다.
  */
 @Controller
+@Slf4j
 public class RequestParamController {
 
     /*
      * Form 사용 X
      */
+
     /**
      * 입력 화면을 표시하는 메서드.
      * <p>
@@ -63,6 +66,7 @@ public class RequestParamController {
     /*
      * Form 객체 사용
      */
+
     /**
      * 입력 화면을 표시하는 메서드.
      * <p>
@@ -83,12 +87,13 @@ public class RequestParamController {
      * <p>
      * POST 요청으로 전달받은 Form 객체 값을 Model에 담고 "confirm" 뷰로 전달합니다.
      *
-     * @param form  사용자가 입력한 데이터를 담고 있는 Form 객체
+     * @param form 사용자가 입력한 데이터를 담고 있는 Form 객체
      * @return "confirm" 뷰 이름
      */
     @PostMapping("confirm_form")
     public String confirmViewForm(Form form, Model model) {
         // Form 객체를 Model에 담음
+        log.info("전달받은 Form : {}", form);
         model.addAttribute("form", form);
         return "confirm_form";
     }
