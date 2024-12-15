@@ -1,10 +1,14 @@
 package com.adam9e96.RequestParamStudy.controller;
 
+import jdk.jfr.ContentType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -19,6 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class RequestParamControllerIntegrationTest {
 
+    private static final Logger log = LoggerFactory.getLogger(RequestParamControllerIntegrationTest.class);
     @Autowired
     private MockMvc mockMvc;
 
@@ -97,7 +102,6 @@ class RequestParamControllerIntegrationTest {
      * 4. form 객체의 name 필드가 "이순신" 인지
      * 5. form 객체의 age 필드가 30 인지
      * 6. form 객체의 birthday 필드가 1980-12-25 로 세팅되었는지
-     *
      */
     @DisplayName("POST /confirm_form 요청 시 Form 객체 바인딩 및 confirm_form 뷰 반환")
     @Test
@@ -133,5 +137,20 @@ class RequestParamControllerIntegrationTest {
         assert context.getBeanDefinitionCount() > 0;
         // 실제 필요한 빈이 있는지
         assert context.containsBean("requestParamController");
+    }
+
+    /**
+     * Content-Type 를 검증할때는 정확하게 지정해줘야하는데
+     * UTF-8 을 검증하려면 text/html;charset=UTF-8
+     */
+    @DisplayName("content 타입 검증")
+    @Test
+    public void testContentType() throws Exception {
+        final String url = "/show_form";
+        mockMvc.perform(get("/show_form"))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType("text/html;charset=UTF-8"))
+                .andExpect(view().name("entry_form"));
+
     }
 }

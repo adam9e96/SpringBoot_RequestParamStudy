@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>입력 화면</title>
+    <meta charset="UTF-8">
+    <title>입력 화면</title>
 </head>
 <body>
 <form th:action="@{/confirm_form}" th:object="${form}" method="post">
-  <div>
-    <label for="name">이름:</label>
-    <input type="text" th:field="*{name}" id="name">
-  </div>
-  <div>
-    <label for="age">나이:</label>
-    <input type="number" th:field="*{age}" id="age" min="1" max="100">
-  </div>
-  <div>
-    <label for="birthday">생년월일:</label>
-    <input type="date" th:field="*{birthday}" id="birthday">
-  </div>
-  <input type="submit" value="전송">
+    <div>
+        <label for="name">이름:</label>
+        <input type="text" th:field="*{name}" id="name" required/>
+    </div>
+    <div>
+        <label for="age">나이:</label>
+        <input type="number" th:field="*{age}" id="age" min="1" max="100" required/>
+    </div>
+    <div>
+        <label for="birthday">생년월일:</label>
+        <input type="date" th:field="*{birthday}" id="birthday" required/>
+    </div>
+    <input type="submit" value="전송">
 </form>
 </body>
 </html>

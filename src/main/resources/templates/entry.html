@@ -8,18 +8,20 @@
 <form th:action="@{confirm}" method="post">
     <div>
         <label for="name">이름:</label>
-        <input type="text" name="name" id="name">
+        <!-- required 속성을 추가 -->
+        <input type="text" name="name" id="name" required>
     </div>
     <div>
         <label for="age">나이:</label>
-        <input type="number" name="age" min="1" max="100" id="age"></input>
+        <!-- required 속성을 추가 -->
+        <input type="number" name="age" min="1" max="100" id="age" required>
     </div>
     <div>
         <label for="birthday">생년월일:</label>
-        <input type="date" name="birthday" id="birthday"></input>
+        <!-- required 속성을 추가 -->
+        <input type="date" name="birthday" id="birthday"  required>
     </div>
     <input type="submit" value="전송">
 </form>
-
 </body>
 </html>
